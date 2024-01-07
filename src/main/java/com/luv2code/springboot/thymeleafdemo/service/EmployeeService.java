@@ -2,9 +2,12 @@ package com.luv2code.springboot.thymeleafdemo.service;
 
 import java.util.List;
 
-import com.luv2code.springboot.thymeleafdemo.entity.Employee;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
-public interface EmployeeService {
+import com.luv2code.springboot.thymeleafdemo.entity.Employee;
+import com.luv2code.springboot.thymeleafdemo.entity.Members;
+
+public interface EmployeeService{
 
 	List<Employee> findAll();
 	
@@ -13,5 +16,6 @@ public interface EmployeeService {
 	void save(Employee theEmployee);
 	
 	void deleteById(int theId);
+	
 	
 }

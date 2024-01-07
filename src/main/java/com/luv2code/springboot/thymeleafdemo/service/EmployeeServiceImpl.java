@@ -4,10 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.luv2code.springboot.thymeleafdemo.dao.EmployeeRepository;
 import com.luv2code.springboot.thymeleafdemo.entity.Employee;
+import com.luv2code.springboot.thymeleafdemo.entity.Members;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -15,7 +18,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	private EmployeeRepository employeeRepository;
 	
 	@Autowired
-	public EmployeeServiceImpl(EmployeeRepository theEmployeeRepository) {
+	public EmployeeServiceImpl(EmployeeRepository theEmployeeRepository ) {
 		employeeRepository = theEmployeeRepository;
 	}
 	
@@ -50,6 +53,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public void deleteById(int theId) {
 		employeeRepository.deleteById(theId);
 	}
+
 
 }
 

@@ -1,37 +1,64 @@
 package com.luv2code.springboot.thymeleafdemo;
 
+import java.lang.reflect.Member;
+
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
-/* -------- PREVIOUS LESSON ----------
- * in this code i will add update buttons for each employee 
- * STEPS:
- * 1. open html form and add the button in a new column in list-employees.html
- * add the reference for the new form for updating 	
- * <a th:href="@{/employees/showFormForUpdate(employeeId=${tempEmployee.id})"
- * that means after clicking on the button the request is sent to employeeId=XXX
- * 2. in controller add the new GetMapping showFormForUpdate
- * the new form takes the employeeId=XXX from the form and puts it in the model
- * 3. adding hidden form field to handle the update
- * NOW we had field that bind to firstName, lastName, ...etc
- * BUT we want to have a hidden field for handling updates as well
- * HERE comes the hidden input field - through it, thymeleaf tells the app 
- * which employee to update
- * -------- CURRENT LESSON ----------
- * adding a delete button
- * the same code as for the update button
- * STEPS:
- * 1. in the html for add the delete button
- * 	<a th:href="@{/employees/delete(employeeId=${tempEmployee.id})}"
- * adding support for prompt window using javascript code
- * onclick="if (!(confirm('Are you sure you want to delete this employee'))) return false">
+import com.luv2code.springboot.thymeleafdemo.entity.Members;
+import com.luv2code.springboot.thymeleafdemo.entity.Roles;
+import com.luv2code.springboot.thymeleafdemo.service.EmployeeService;
+import com.luv2code.springboot.thymeleafdemo.service.MembersService;
 
- */
+
 @SpringBootApplication
 public class ThymeleafdemoApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ThymeleafdemoApplication.class, args);
+	}
+	
+
+	@Bean
+	public CommandLineRunner commandLine(MembersService membersService , 
+			EmployeeService empService 	) {
+		return runner ->  {
+			//createInstructor(appDAO);
+			//findInstructor(appDAO);
+			//deleteInstructor(appDAO);
+			//findingInstructorDetail(appDAO);
+			//deleteInstructorDetailsById(appDAO);
+			//createUsersAndRoles(membersService);
+
+		};
+	}
+
+	private void createUsersAndRoles(MembersService membersService ) {
+		
+		//create Member
+		
+		Members mem = new Members("luka" , "luka");
+					
+		//create role
+		Roles role = new Roles("ROLE_EMPLOYEE");
+		Roles role1 = new Roles("ROLE_MANAGER");
+		Roles role2 = new Roles("ROLE_ADMIN");
+
+
+		//associate objects together using the one to one relashionship
+		mem.add(role);
+		mem.add(role1);
+		mem.add(role2);
+
+
+		//save instructor
+		System.out.println("saving Member " +mem);
+		
+		//save member
+		membersService.save(mem);
 	}
 
 }
