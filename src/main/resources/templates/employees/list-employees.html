@@ -13,15 +13,32 @@
 </head>
 
 <body>
+<style>
 
+.logout-box {
+    width: 400px;
+    margin-left: 1100px;
+	flex-direction: column;
+
+} 
+</style>
+
+<!-- adding logout button -->
+<div class ="logout-box">
+<form action="#" th:action="@{/logout}" method="post">
+<input type="submit" value="logout"
+class=" btn btn-primary btn-sm mb-3" />
+</form>
+</div>
 <div class="container">
 
 	<h3>Employee Directory</h3>
 	<hr>
 	<!-- adding the "add employee" button and applying bootstrap styles-->
 	<a th:href="@{/employees/showForm}"
-	    class=" btn btn-primary btn-sm mb-3">
-		Add Employee 
+	    class=" btn btn-primary btn-sm mb-3"
+	    		th:object="${theMember}">
+		Register new Employee 
 		</a>
 	
 	<table class="table table-bordered table-striped">
@@ -61,6 +78,8 @@
 	</table>
 	
 </div>
+
+
 	
 </body>
 </html>
